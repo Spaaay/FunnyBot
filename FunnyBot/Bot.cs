@@ -6,7 +6,7 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 
 
-namespace RovexBot
+namespace FunnyBot
 {
     class Bot
     {
@@ -18,14 +18,14 @@ namespace RovexBot
         public static string Message;
         public static User UserId;
         public static string UserName;
-        public static List<string> DoebList = new List<string>();
-        public static List<string> DikyxaList = new List<string>();
+        public static List<string> AggressionList = new List<string>();
+        public static List<string> RandomList = new List<string>();
         public static bool Welcome;
         public static int Agressor = 8;
 
         static void Main(string[] args)
         {
-            BotClient = new TelegramBotClient("583948499:AAEu0Eqt2ZdzdVYHFnaG5krdJDWB4CO9zSw");
+            BotClient = new TelegramBotClient("581243302:AAFSsqS_ylNPB7-XNOmJ05Vtpih_kZbqljM");
             BotClient.OnMessage += HandleMessage;
             BotClient.StartReceiving();
             var tr = new Thread(Randomizator);
@@ -44,11 +44,11 @@ namespace RovexBot
                 UserId = messageEventArgs.Message.From;
                 UserName = UserId.FirstName + " " + UserId.LastName;
                 // Welcome
-                if (!Welcome) { BotSender.SendMessage(ChatId, "Вечер в хату собаки сутулые"); Welcome = true; }
+                if (!Welcome) { BotSender.SendMessage(ChatId, "Добрейший вечерочек"); Welcome = true; }
                 // Наполнение коллекций
                 Collections.CreatingCollecrions();
                 // Логика
-                BotLogic.DoSomething();
+                BotCommnands.DoSomething();
                 //Debug
                 Console.WriteLine(ChatId);
             }
@@ -66,7 +66,7 @@ namespace RovexBot
                 if (ChatIDs.Count != 0)
                 {
                     var randomChat = ChatIDs[Random.Next(0, ChatIDs.Count)];
-                    if (Random.Next(1, 200) == 74) Commands.RandomDikyxa(randomChat);
+                    if (Random.Next(1, 200) == 74) BotLogic.RandomAction(randomChat);
                     Thread.Sleep(10000);
                 }
             }

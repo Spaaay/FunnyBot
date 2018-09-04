@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using Telegram.Bot.Types;
+using static FunnyBot.HtmlParsing;
 
 
-namespace RovexBot
+namespace FunnyBot
 {
-    class Commands : Bot
+    class BotLogic : Bot
     {
         public static Dictionary<string, long> DogsStats = new Dictionary<string, long>();
         public static BotSender BotSender = new BotSender();
+        
 
         public static void Pic()
         {
             BotSender.SendPicture(ChatId, new FileToSend("https://goo.gl/qsRbXW"));
         }
 
-        public static void Evgen()
+        public static void Joke()
         {
-            BotSender.SendMessage(ChatId, "No no no ! EvgenDog");
+            string url = "https://www.anekdot.ru";
+            String Joke = GetJoke(GetHtmlPage(url));
+            BotSender.SendMessage(ChatId, Joke);
         }
         public static void Agr()
         {
@@ -38,11 +42,11 @@ namespace RovexBot
             else BotSender.SendMessage(ChatId, "Введите корректное значение в диапазоне 3-10 (Пример: /agr 7)");
         }
 
-        public static void AddDoeb()
+        public static void AddAggresion()
         {
             if (UserId.Id == 317300041)
             {
-                using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_doeb.txt"))
+                using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_aggression.txt"))
                 {
                     var temp = Message?.Substring(9).Trim();
                     if (temp.Length > 2)
@@ -61,14 +65,14 @@ namespace RovexBot
                     else BotSender.SendMessage(ChatId, "Не добавлено, минимум 3 знака");
                 }
             }
-            else BotSender.SendMessage(ChatId, "Ты кто такой пёс, иди гуляй, только владыка может добавлять фразы");
+            else BotSender.SendMessage(ChatId, "Недостаточно прав");
         }
 
-        public static void AddDikyxa()
+        public static void AddRandom()
         {
             if (UserId.Id == 317300041)
             {
-                using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_dikyxa.txt"))
+                using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_random.txt"))
                 {
                     var temp = Message?.Substring(11).Trim();
                     if (temp.Length > 2)
@@ -87,12 +91,12 @@ namespace RovexBot
                     else BotSender.SendMessage(ChatId, "Не добавлено, минимум 3 знака");
                 }
             }
-            else BotSender.SendMessage(ChatId, "Ты кто такой пёс, иди гуляй, только владыка может добавлять фразы");
+            else BotSender.SendMessage(ChatId, "Недостаточно прав");
         }
 
-        public static void RandomDikyxa(long cId)
+        public static void RandomAction(long cId)
         {
-            BotSender.SendMessage(cId, DikyxaList[Random.Next(0, DikyxaList.Count - 1)]); 
+            BotSender.SendMessage(cId, RandomList[Random.Next(0, RandomList.Count - 1)]); 
         }
 
         public static void FoundDog(List<string> users)
@@ -106,7 +110,7 @@ namespace RovexBot
             }
             else
             {
-                BotSender.SendMessage(ChatId, "Количество гусей недостаточное для начала этой хуйни, напишите какую-то поеботу в чат ");
+                BotSender.SendMessage(ChatId, "Количество участников недостаточное для начала игры, напишите хоть что-то в чат ");
             }
         }
         public static void DogsStatsForToday()
@@ -122,14 +126,14 @@ namespace RovexBot
             }
             else
             {
-                BotSender.SendMessage(ChatId, "Собаки пока не найдены (кроме Жени)");
+                BotSender.SendMessage(ChatId, "Собаки пока не найдены");
             }
         }
 
-        public static void RandomDoeb(string iDpacana)
+        public static void RandomAggression(string IdUser)
         {
 
-            BotSender.SendMessage(ChatId, "@" + iDpacana+ " " + DoebList[Random.Next(0, DoebList.Count-1)]);
+            BotSender.SendMessage(ChatId, "@" + IdUser+ " " + AggressionList[Random.Next(0, AggressionList.Count-1)]);
         }
     }
 }

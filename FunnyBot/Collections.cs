@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace RovexBot
+namespace FunnyBot
 {
     class Collections : Bot
     {
@@ -21,18 +21,18 @@ namespace RovexBot
             }
             // Text BD
             string temp = "";
-            using (StreamReader fs = new StreamReader(@"..\..\AppData\BD_doeb.txt"))
+            using (StreamReader fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
             {
                 while ((temp = fs.ReadLine()) != null)
                 {
-                    if (!DoebList.Contains(temp)) DoebList.Add(temp);
+                    if (!AggressionList.Contains(temp)) AggressionList.Add(temp);
                 }
             }
-            using (StreamReader fs = new StreamReader(@"..\..\AppData\BD_dikyxa.txt"))
+            using (StreamReader fs = new StreamReader(@"..\..\AppData\BD_random.txt"))
             {
                 while ((temp = fs.ReadLine()) != null)
                 {
-                    if (!DoebList.Contains(temp)) DikyxaList.Add(temp);
+                    if (!AggressionList.Contains(temp)) RandomList.Add(temp);
                 }
             }
         }
