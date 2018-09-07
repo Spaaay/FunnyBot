@@ -11,8 +11,6 @@ namespace FunnyBot
     public class HtmlParsing
     {
         static string HtmlText = string.Empty;
-        static public List<string> jokeList = new List<string>();
-
         public static string GetHtmlPage(string url)
         {
             //Encoding enc = Encoding.GetEncoding(1251);
@@ -35,10 +33,10 @@ namespace FunnyBot
         public static string GetJoke(string HtmlText)
         {
             string temp = "";
-            string result = string.Empty;
+            string result = "";
+            List<string> jokeList = new List<string>();
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HtmlText);
-            //HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//html/body/div[2]/div[4]/div[2]/div/div[contains(@class, 'text')]/div");
             HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'text')]");
             if (coll != null)
             {
@@ -54,6 +52,26 @@ namespace FunnyBot
             }
             else Console.WriteLine("EMPTY");
             result = jokeList[Bot.Random.Next(0, jokeList.Count)];
+            return result;
+        }
+        public static string GetPic(string HtmlText)
+        {
+            string temp = "";
+            string result = "";
+            List<string> picList = new List<string>();
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(HtmlText);
+            HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'post')]/img[contains(@class, 'hidden-phone')]");
+            if (coll != null)
+            {
+                foreach (HtmlNode v in coll)
+                {
+                    temp = v.Attributes["src"].Value;
+                    if (temp != "" && temp != null && !picList.Contains(temp)) picList.Add(temp);
+                }
+            }
+            else Console.WriteLine("EMPTY");
+            result = picList[Bot.Random.Next(0, picList.Count)];
             return result;
         }
     }

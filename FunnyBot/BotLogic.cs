@@ -15,13 +15,15 @@ namespace FunnyBot
 
         public static void Pic()
         {
-            BotSender.SendPicture(ChatId, new FileToSend("https://goo.gl/qsRbXW"));
+            string url = "http://vse-shutochki.ru/kartinki-prikolnye";
+            string pic = GetPic(GetHtmlPage(url));
+            BotSender.SendPicture(ChatId, new FileToSend(pic));
         }
 
         public static void Joke()
         {
             string url = "https://www.anekdot.ru/random/anekdot/";
-            String joke = GetJoke(GetHtmlPage(url));
+            string joke = GetJoke(GetHtmlPage(url));
             BotSender.SendMessage(ChatId, joke);
         }
         public static void Agr()
