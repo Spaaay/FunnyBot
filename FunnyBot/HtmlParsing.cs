@@ -10,7 +10,7 @@ namespace FunnyBot
 {
     public class HtmlParsing
     {
-        static string HtmlText = string.Empty;
+        private static string htmlText = "";
         public static string GetHtmlPage(string url)
         {
             //Encoding enc = Encoding.GetEncoding(1251);
@@ -19,9 +19,9 @@ namespace FunnyBot
                 HttpWebRequest myHttWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
                 HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttWebRequest.GetResponse();
                 StreamReader strm = new StreamReader(myHttpWebResponse.GetResponseStream());
-                HtmlText = strm.ReadToEnd();
+                htmlText = strm.ReadToEnd();
                 strm.Close();
-                return HtmlText;
+                return htmlText;
             }
             catch (Exception e)
             {
@@ -30,13 +30,13 @@ namespace FunnyBot
             }
         }
 
-        public static string GetJoke(string HtmlText)
+        public static string GetJoke(string htmlText)
         {
             string temp = "";
             string result = "";
             List<string> jokeList = new List<string>();
             HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(HtmlText);
+            doc.LoadHtml(htmlText);
             HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'text')]");
             if (coll != null)
             {
@@ -54,13 +54,13 @@ namespace FunnyBot
             result = jokeList[Bot.Random.Next(0, jokeList.Count)];
             return result;
         }
-        public static string GetPic(string HtmlText)
+        public static string GetPic(string htmlText)
         {
             string temp = "";
             string result = "";
             List<string> picList = new List<string>();
             HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(HtmlText);
+            doc.LoadHtml(htmlText);
             HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'post')]/img[contains(@class, 'hidden-phone')]");
             if (coll != null)
             {

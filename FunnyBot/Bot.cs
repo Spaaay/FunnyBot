@@ -37,7 +37,7 @@ namespace FunnyBot
         {
             try
             {
-                // Переменные
+                // Variables
                 ChatId = messageEventArgs.Message.Chat.Id;
                 if (messageEventArgs.Message.Text != null) Message = messageEventArgs.Message.Text.ToLower();
                 else Message = "";
@@ -45,11 +45,11 @@ namespace FunnyBot
                 UserName = UserId.FirstName + " " + UserId.LastName;
                 // Welcome
                 if (!Welcome) { BotSender.SendMessage(ChatId, "Добрейший вечерочек"); Welcome = true; }
-                // Наполнение коллекций
+                // Filling collections
                 Collections.CreatingCollecrions();
-                // Логика
+                // Logic
                 BotCommnands.DoSomething();
-                //Debug
+                // Debug
                 Console.WriteLine(ChatId);
             }
             catch (Exception e)

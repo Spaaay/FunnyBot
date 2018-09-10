@@ -10,8 +10,6 @@ namespace FunnyBot
     class BotLogic : Bot
     {
         public static Dictionary<string, long> DogsStats = new Dictionary<string, long>();
-        public static BotSender BotSender = new BotSender();
-        
 
         public static void Pic()
         {
