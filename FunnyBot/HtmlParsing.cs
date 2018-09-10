@@ -10,7 +10,8 @@ namespace FunnyBot
 {
     public class HtmlParsing
     {
-        private static string htmlText = "";
+        private static string _htmlText = string.Empty;
+
         public static string GetHtmlPage(string url)
         {
             //Encoding enc = Encoding.GetEncoding(1251);
@@ -19,21 +20,24 @@ namespace FunnyBot
                 HttpWebRequest myHttWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
                 HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttWebRequest.GetResponse();
                 StreamReader strm = new StreamReader(myHttpWebResponse.GetResponseStream());
-                htmlText = strm.ReadToEnd();
+                _htmlText = strm.ReadToEnd();
                 strm.Close();
-                return htmlText;
+                return _htmlText;
             }
             catch (Exception e)
             {
                 Console.WriteLine("!" + e.Message);
-                return String.Empty;
+                return string.Empty;
             }
+            //todo Finally
         }
+        //todo rename htmlText
+        //todo var!
 
         public static string GetJoke(string htmlText)
         {
-            string temp = "";
-            string result = "";
+            string temp = string.Empty;
+            string result = string.Empty;
             List<string> jokeList = new List<string>();
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(htmlText);
@@ -46,7 +50,7 @@ namespace FunnyBot
                     {
                         temp = v.InnerHtml;
                         temp = temp.Replace("<br>", "\r\n");
-                        if (temp != "" && temp != null && !jokeList.Contains(temp)) jokeList.Add(temp);
+                        if (temp != "" && !jokeList.Contains(temp)) jokeList.Add(temp);
                     }
                 }
             }
@@ -54,6 +58,7 @@ namespace FunnyBot
             result = jokeList[Bot.Random.Next(0, jokeList.Count)];
             return result;
         }
+
         public static string GetPic(string htmlText)
         {
             string temp = "";
@@ -67,12 +72,13 @@ namespace FunnyBot
                 foreach (HtmlNode v in coll)
                 {
                     temp = v.Attributes["src"].Value;
-                    if (temp != "" && temp != null && !picList.Contains(temp)) picList.Add(temp);
+                    if (!string.IsNullOrEmpty(temp) && !picList.Contains(temp)) picList.Add(temp);
                 }
             }
             else Console.WriteLine("EMPTY");
             result = picList[Bot.Random.Next(0, picList.Count)];
             return result;
+            //todo MongoDB / sqlite
         }
     }
 }

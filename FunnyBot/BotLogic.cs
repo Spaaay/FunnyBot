@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Telegram.Bot.Types;
 using static FunnyBot.HtmlParsing;
 
@@ -17,13 +18,14 @@ namespace FunnyBot
             string pic = GetPic(GetHtmlPage(url));
             BotSender.SendPicture(ChatId, new FileToSend(pic));
         }
-
+        //todo perevesti v settings
         public static void Joke()
         {
             string url = "https://www.anekdot.ru/random/anekdot/";
             string joke = GetJoke(GetHtmlPage(url));
             BotSender.SendMessage(ChatId, joke);
         }
+        //todo perevesti v resource
         public static void Agr()
         {
             int x = 0;
@@ -75,7 +77,7 @@ namespace FunnyBot
                 using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_random.txt"))
                 {
                     var temp = Message?.Substring(11).Trim();
-                    if (temp.Length > 2)
+                    if (temp != null && temp.Length > 2)
                     {
                         try
                         {
@@ -117,11 +119,7 @@ namespace FunnyBot
         {
             if (DogsStats.Count > 0)
             {
-                var temp = "";
-                foreach (var s in DogsStats)
-                {
-                    temp = temp + s.Key + " - " + s.Value + " раз был псом сегодня" + "\n";
-                }
+                var temp = DogsStats.Aggregate("", (current, s) => current + s.Key + " - " + s.Value + " раз был псом сегодня" + "\n");
                 BotSender.SendMessage(ChatId, temp);
             }
             else
@@ -130,10 +128,9 @@ namespace FunnyBot
             }
         }
 
-        public static void RandomAggression(string IdUser)
+        public static void RandomAggression(string idUser)
         {
-
-            BotSender.SendMessage(ChatId, "@" + IdUser+ " " + AggressionList[Random.Next(0, AggressionList.Count-1)]);
+            BotSender.SendMessage(ChatId, "@" + idUser+ " " + AggressionList[Random.Next(0, AggressionList.Count-1)]);
         }
     }
 }
