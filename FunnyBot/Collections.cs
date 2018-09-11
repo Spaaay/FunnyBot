@@ -11,7 +11,7 @@ namespace FunnyBot
             if (!ChatIDs.Contains(ChatId)) ChatIDs.Add(ChatId);
             if (!Users.ContainsKey(ChatId))
             {
-                List<string> list = new List<string>();
+                var list = new List<string>();
                 list.Add(UserName);
                 Users.Add(ChatId, new List<string>(list));
             }
@@ -20,15 +20,15 @@ namespace FunnyBot
                 Users[ChatId].Add(UserName);
             }
             // Text BD
-            string temp = "";
-            using (StreamReader fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
+            var temp = "";
+            using (var fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
             {
                 while ((temp = fs.ReadLine()) != null)
                 {
                     if (!AggressionList.Contains(temp)) AggressionList.Add(temp);
                 }
             }
-            using (StreamReader fs = new StreamReader(@"..\..\AppData\BD_random.txt"))
+            using (var fs = new StreamReader(@"..\..\AppData\BD_random.txt"))
             {
                 while ((temp = fs.ReadLine()) != null)
                 {

@@ -22,5 +22,41 @@ namespace FunnyBot.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://vse-shutochki.ru/kartinki-prikolnye")]
+        public string PicUrl {
+            get {
+                return ((string)(this["PicUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.anekdot.ru/random/anekdot/")]
+        public string JokeUrl {
+            get {
+                return ((string)(this["JokeUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("317300041")]
+        public long AdminId {
+            get {
+                return ((long)(this["AdminId"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("581243302:AAFSsqS_ylNPB7-XNOmJ05Vtpih_kZbqljM")]
+        public string BotId {
+            get {
+                return ((string)(this["BotId"]));
+            }
+        }
     }
 }

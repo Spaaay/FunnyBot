@@ -8,6 +8,7 @@ namespace FunnyBot
         {
             BotClient.SendTextMessageAsync(chatId, text);
         }
+
         public static void SendPicture(long chatId, FileToSend file)
         {
             BotClient.SendPhotoAsync(chatId, file);

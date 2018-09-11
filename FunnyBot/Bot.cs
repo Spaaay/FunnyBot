@@ -4,6 +4,7 @@ using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
+using FunnyBot.Properties;
 
 
 namespace FunnyBot
@@ -25,7 +26,7 @@ namespace FunnyBot
 
         static void Main(string[] args)
         {
-            BotClient = new TelegramBotClient("581243302:AAFSsqS_ylNPB7-XNOmJ05Vtpih_kZbqljM");
+            BotClient = new TelegramBotClient(Settings.Default.BotId);
             BotClient.OnMessage += HandleMessage;
             BotClient.StartReceiving();
             var tr = new Thread(Randomizator);
@@ -44,7 +45,7 @@ namespace FunnyBot
                 UserId = messageEventArgs.Message.From;
                 UserName = UserId.FirstName + " " + UserId.LastName;
                 // Welcome
-                if (!Welcome) { BotSender.SendMessage(ChatId, "Добрейший вечерочек"); Welcome = true; }
+                if (!Welcome) { BotSender.SendMessage(ChatId, Resources.Hello); Welcome = true; }
                 // Filling collections
                 Collections.CreatingCollecrions();
                 // Logic
@@ -54,8 +55,8 @@ namespace FunnyBot
             }
             catch (Exception e)
             {
-                Console.WriteLine("!!! " + e.Message);
-                Console.WriteLine("=== " + e.Source);
+                Console.WriteLine("HandleMessage Exception: " + e.Message);
+                Console.WriteLine("HandleMessage Exception: " + e.Source);
             }
         }
 

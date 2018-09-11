@@ -19,32 +19,30 @@ namespace FunnyBot
             {
                 HttpWebRequest myHttWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
                 HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttWebRequest.GetResponse();
-                StreamReader strm = new StreamReader(myHttpWebResponse.GetResponseStream());
-                _htmlText = strm.ReadToEnd();
-                strm.Close();
+                using (StreamReader strm = new StreamReader(myHttpWebResponse.GetResponseStream()))
+                {
+                    _htmlText = strm.ReadToEnd();
+                }
                 return _htmlText;
             }
             catch (Exception e)
             {
-                Console.WriteLine("!" + e.Message);
+                Console.WriteLine("GetHtmlPage Exception: " + e.Message);
                 return string.Empty;
             }
-            //todo Finally
         }
-        //todo rename htmlText
-        //todo var!
 
-        public static string GetJoke(string htmlText)
+        public static string GetJoke(string page)
         {
-            string temp = string.Empty;
-            string result = string.Empty;
-            List<string> jokeList = new List<string>();
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(htmlText);
-            HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'text')]");
-            if (coll != null)
+            var temp = string.Empty;
+            var result = string.Empty;
+            var jokeList = new List<string>();
+            var doc = new HtmlDocument();
+            doc.LoadHtml(page);
+            HtmlNodeCollection collection = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'text')]");
+            if (collection != null)
             {
-                foreach (HtmlNode v in coll)
+                foreach (HtmlNode v in collection)
                 {
                     if (!v.InnerHtml.Contains("&#8230") && !v.InnerHtml.Contains("function") && !v.InnerHtml.Contains("&quot;") && !v.InnerHtml.Contains("<span>"))
                     {
@@ -54,28 +52,28 @@ namespace FunnyBot
                     }
                 }
             }
-            else Console.WriteLine("EMPTY");
+            else Console.WriteLine("GetJoke collection is empty ");
             result = jokeList[Bot.Random.Next(0, jokeList.Count)];
             return result;
         }
 
-        public static string GetPic(string htmlText)
+        public static string GetPic(string page)
         {
-            string temp = "";
-            string result = "";
-            List<string> picList = new List<string>();
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(htmlText);
-            HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'post')]/img[contains(@class, 'hidden-phone')]");
-            if (coll != null)
+            var temp = string.Empty;
+            var result = string.Empty;
+            var picList = new List<string>();
+            var doc = new HtmlDocument();
+            doc.LoadHtml(page);
+            HtmlNodeCollection collection = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'post')]/img[contains(@class, 'hidden-phone')]");
+            if (collection != null)
             {
-                foreach (HtmlNode v in coll)
+                foreach (HtmlNode v in collection)
                 {
                     temp = v.Attributes["src"].Value;
                     if (!string.IsNullOrEmpty(temp) && !picList.Contains(temp)) picList.Add(temp);
                 }
             }
-            else Console.WriteLine("EMPTY");
+            else Console.WriteLine("GetPic  collection is empty");
             result = picList[Bot.Random.Next(0, picList.Count)];
             return result;
             //todo MongoDB / sqlite

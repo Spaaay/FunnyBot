@@ -59,5 +59,95 @@ namespace FunnyBot.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Недостаточно прав.
+        /// </summary>
+        internal static string Access_denied {
+            get {
+                return ResourceManager.GetString("Access_denied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавил в базу - .
+        /// </summary>
+        internal static string AddToBase {
+            get {
+                return ResourceManager.GetString("AddToBase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не добавлено, минимум 3 знака.
+        /// </summary>
+        internal static string AddToBase_error {
+            get {
+                return ResourceManager.GetString("AddToBase_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Введите корректное значение в диапазоне 3-9 (Пример: /agr 7).
+        /// </summary>
+        internal static string Agressor_correct {
+            get {
+                return ResourceManager.GetString("Agressor_correct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Значение агресивности - .
+        /// </summary>
+        internal static string Agressor_value {
+            get {
+                return ResourceManager.GetString("Agressor_value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пёс дня сегодня: .
+        /// </summary>
+        internal static string DogOfTheDay {
+            get {
+                return ResourceManager.GetString("DogOfTheDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество участников недостаточное для начала игры, напишите хоть что-то в чат.
+        /// </summary>
+        internal static string DogOfTheDay_few_players {
+            get {
+                return ResourceManager.GetString("DogOfTheDay_few_players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Собаки пока не найдены.
+        /// </summary>
+        internal static string DogOfTheDay_no_found {
+            get {
+                return ResourceManager.GetString("DogOfTheDay_no_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на  раз был псом сегодня.
+        /// </summary>
+        internal static string DogOfTheDay_stats {
+            get {
+                return ResourceManager.GetString("DogOfTheDay_stats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добрейший вечерочек.
+        /// </summary>
+        internal static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
     }
 }

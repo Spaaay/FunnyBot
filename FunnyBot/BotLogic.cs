@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FunnyBot.Properties;
 using Telegram.Bot.Types;
 using static FunnyBot.HtmlParsing;
 
@@ -14,65 +15,65 @@ namespace FunnyBot
 
         public static void Pic()
         {
-            string url = "http://vse-shutochki.ru/kartinki-prikolnye";
-            string pic = GetPic(GetHtmlPage(url));
+            var url = Settings.Default.PicUrl;
+            var pic = GetPic(GetHtmlPage(url));
             BotSender.SendPicture(ChatId, new FileToSend(pic));
         }
-        //todo perevesti v settings
+        
         public static void Joke()
         {
-            string url = "https://www.anekdot.ru/random/anekdot/";
-            string joke = GetJoke(GetHtmlPage(url));
+            var url = Settings.Default.JokeUrl;
+            var joke = GetJoke(GetHtmlPage(url));
             BotSender.SendMessage(ChatId, joke);
         }
-        //todo perevesti v resource
+       
         public static void Agr()
         {
-            int x = 0;
+            var x = 0;
             if (Int32.TryParse(Message.Substring(5), out x))
             {
                 if (x > 2 && x < 10)
                 {
                     Agressor = x;
-                    BotSender.SendMessage(ChatId, "Значение агресивности - " + Agressor);
+                    BotSender.SendMessage(ChatId, Resources.Agressor_value + Agressor);
                 }
                 else
                 {
-                   BotSender.SendMessage(ChatId, "Введите корректное значение в диапазоне 3-10 (Пример: /agr 7)");
+                   BotSender.SendMessage(ChatId, Resources.Agressor_correct);
                 }
             }
-            else BotSender.SendMessage(ChatId, "Введите корректное значение в диапазоне 3-10 (Пример: /agr 7)");
+            else BotSender.SendMessage(ChatId, Resources.Agressor_correct);
         }
 
         public static void AddAggresion()
         {
-            if (UserId.Id == 317300041)
+            if (UserId.Id == Settings.Default.AdminId)
             {
                 using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_aggression.txt"))
                 {
                     var temp = Message?.Substring(9).Trim();
-                    if (temp.Length > 2)
+                    if (temp != null && temp.Length > 2)
                     {
                         try
                         {
                             FileWritter.WriteLine(temp);
-                            BotSender.SendMessage(ChatId, "Добавил в базу - " + temp);
+                            BotSender.SendMessage(ChatId, Resources.AddToBase + temp);
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine("+++++ " + e.Message);
+                            Console.WriteLine("AddAggresion Exception: " + e.Message);
                         }
 
                     }
-                    else BotSender.SendMessage(ChatId, "Не добавлено, минимум 3 знака");
+                    else BotSender.SendMessage(ChatId, Resources.AddToBase_error);
                 }
             }
-            else BotSender.SendMessage(ChatId, "Недостаточно прав");
+            else BotSender.SendMessage(ChatId, Resources.Access_denied);
         }
 
         public static void AddRandom()
         {
-            if (UserId.Id == 317300041)
+            if (UserId.Id == Settings.Default.AdminId)
             {
                 using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_random.txt"))
                 {
@@ -82,23 +83,23 @@ namespace FunnyBot
                         try
                         {
                             FileWritter.WriteLine(temp);
-                            BotSender.SendMessage(ChatId, "Добавил в базу - " + temp);
+                            BotSender.SendMessage(ChatId, Resources.AddToBase + temp);
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine("+++++ " + e.Message);
+                            Console.WriteLine("AddRandom Exception: " + e.Message);
                         }
 
                     }
-                    else BotSender.SendMessage(ChatId, "Не добавлено, минимум 3 знака");
+                    else BotSender.SendMessage(ChatId, Resources.AddToBase_error);
                 }
             }
-            else BotSender.SendMessage(ChatId, "Недостаточно прав");
+            else BotSender.SendMessage(ChatId, Resources.Access_denied);
         }
 
-        public static void RandomAction(long cId)
+        public static void RandomAction(long chatId)
         {
-            BotSender.SendMessage(cId, RandomList[Random.Next(0, RandomList.Count - 1)]); 
+            BotSender.SendMessage(chatId, RandomList[Random.Next(0, RandomList.Count - 1)]); 
         }
 
         public static void FoundDog(List<string> users)
@@ -106,25 +107,25 @@ namespace FunnyBot
             if (users.Count > 1)
             {
                 var randomGysb = Random.Next(0, users.Count);
-                BotSender.SendMessage(ChatId, "Пёс дня сегодня: " + users[randomGysb]);
+                BotSender.SendMessage(ChatId, Resources.DogOfTheDay + users[randomGysb]);
                 if (!DogsStats.ContainsKey(users[randomGysb])) DogsStats.Add(users[randomGysb], 1);
                 else DogsStats[users[randomGysb]]++;
             }
             else
             {
-                BotSender.SendMessage(ChatId, "Количество участников недостаточное для начала игры, напишите хоть что-то в чат ");
+                BotSender.SendMessage(ChatId, Resources.DogOfTheDay_few_players);
             }
         }
         public static void DogsStatsForToday()
         {
             if (DogsStats.Count > 0)
             {
-                var temp = DogsStats.Aggregate("", (current, s) => current + s.Key + " - " + s.Value + " раз был псом сегодня" + "\n");
+                var temp = DogsStats.Aggregate("", (current, s) => current + s.Key + " - " + s.Value + Resources.DogOfTheDay_stats + "\n");
                 BotSender.SendMessage(ChatId, temp);
             }
             else
             {
-                BotSender.SendMessage(ChatId, "Собаки пока не найдены");
+                BotSender.SendMessage(ChatId, Resources.DogOfTheDay_no_found);
             }
         }
 
