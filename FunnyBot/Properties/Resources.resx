@@ -132,6 +132,9 @@
   <data name="Agressor_value" xml:space="preserve">
     <value>Значение агресивности - </value>
   </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Средний курс USD на </value>
+  </data>
   <data name="DogOfTheDay" xml:space="preserve">
     <value>Пёс дня сегодня: </value>
   </data>

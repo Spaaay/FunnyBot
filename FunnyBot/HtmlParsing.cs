@@ -5,20 +5,22 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace FunnyBot
 {
     public class HtmlParsing
     {
         private static string _htmlText = string.Empty;
+        private static List<JsonCurrency> _currencyList = new List<JsonCurrency>();
 
         public static string GetHtmlPage(string url)
         {
             //Encoding enc = Encoding.GetEncoding(1251);
             try
             {
-                HttpWebRequest myHttWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttWebRequest.GetResponse();
+                HttpWebRequest myHttWebRequest = (HttpWebRequest) HttpWebRequest.Create(url);
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse) myHttWebRequest.GetResponse();
                 using (StreamReader strm = new StreamReader(myHttpWebResponse.GetResponseStream()))
                 {
                     _htmlText = strm.ReadToEnd();
@@ -44,7 +46,8 @@ namespace FunnyBot
             {
                 foreach (HtmlNode v in collection)
                 {
-                    if (!v.InnerHtml.Contains("&#8230") && !v.InnerHtml.Contains("function") && !v.InnerHtml.Contains("&quot;") && !v.InnerHtml.Contains("<span>"))
+                    if (!v.InnerHtml.Contains("&#8230") && !v.InnerHtml.Contains("function") &&
+                        !v.InnerHtml.Contains("&quot;") && !v.InnerHtml.Contains("<span>"))
                     {
                         temp = v.InnerHtml;
                         temp = temp.Replace("<br>", "\r\n");
@@ -64,7 +67,8 @@ namespace FunnyBot
             var picList = new List<string>();
             var doc = new HtmlDocument();
             doc.LoadHtml(page);
-            HtmlNodeCollection collection = doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'post')]/img[contains(@class, 'hidden-phone')]");
+            HtmlNodeCollection collection =
+                doc.DocumentNode.SelectNodes("//*/div[contains(@class, 'post')]/img[contains(@class, 'hidden-phone')]");
             if (collection != null)
             {
                 foreach (HtmlNode v in collection)
@@ -76,7 +80,30 @@ namespace FunnyBot
             else Console.WriteLine("GetPic  collection is empty");
             result = picList[Bot.Random.Next(0, picList.Count)];
             return result;
-            //todo MongoDB / sqlite
+        }
+
+        public static double GetCurrency(string jsonUrl)
+        {
+            _currencyList = JsonConvert.DeserializeObject<List<JsonCurrency>>(jsonUrl);
+            foreach (var i in _currencyList)
+            {
+                if (i.cc.ToLower().Equals("usd")) return Math.Round(i.rate, 2);
+            }
+            return 0;
+        }
+
+        public class JsonCurrency
+        {
+            [JsonProperty("r030")]
+            public int r030 { get; set; }
+            [JsonProperty("txt")]
+            public string txt { get; set; }
+            [JsonProperty("rate")]
+            public double rate { get; set; }
+            [JsonProperty("cc")]
+            public string cc { get; set; }
+            [JsonProperty("exchangedate")]
+            public string exchangedate { get; set; }
         }
     }
 }

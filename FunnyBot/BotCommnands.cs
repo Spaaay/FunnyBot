@@ -10,6 +10,7 @@ namespace FunnyBot
         else if (Message.Equals("/pic") || Message.Equals("/pic@funny_luckybot")) BotLogic.Pic();
         else if (Message.Equals("/founddog") || Message.Equals("/founddog@funny_luckybot"))  BotLogic.FoundDog(Users[ChatId]);
         else if (Message.Equals("/dogstats") || Message.Equals("/dogstats@funny_luckybot"))  BotLogic.DogsStatsForToday();
+        else if (Message.Equals("/currency") || Message.Equals("/currency@funny_luckybot")) BotLogic.Currency();
         else if (Message.StartsWith("/addrandom")) BotLogic.AddRandom();
         else if (Message.StartsWith("/addaggresion")) BotLogic.AddAggresion();
         else if (Message.StartsWith("/agr")) BotLogic.Agr();

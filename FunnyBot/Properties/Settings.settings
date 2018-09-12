@@ -14,5 +14,8 @@
     <Setting Name="BotId" Type="System.String" Scope="Application">
       <Value Profile="(Default)">581243302:AAFSsqS_ylNPB7-XNOmJ05Vtpih_kZbqljM</Value>
     </Setting>
+    <Setting Name="CurrencyUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

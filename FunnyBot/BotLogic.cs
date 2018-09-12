@@ -15,18 +15,23 @@ namespace FunnyBot
 
         public static void Pic()
         {
-            var url = Settings.Default.PicUrl;
-            var pic = GetPic(GetHtmlPage(url));
+            var pic = GetPic(GetHtmlPage(Settings.Default.PicUrl));
             BotSender.SendPicture(ChatId, new FileToSend(pic));
         }
         
         public static void Joke()
         {
-            var url = Settings.Default.JokeUrl;
-            var joke = GetJoke(GetHtmlPage(url));
+            var joke = GetJoke(GetHtmlPage(Settings.Default.JokeUrl));
             BotSender.SendMessage(ChatId, joke);
         }
-       
+
+        public static void Currency()
+        {
+            var currency = GetCurrency(GetHtmlPage(Settings.Default.CurrencyUrl));
+            BotSender.SendMessage(ChatId, Resources.Currency + String.Format("{0:dd/MM/yyyy}", DateTime.Today) + " = " + currency + "грн");
+
+        }
+
         public static void Agr()
         {
             var x = 0;

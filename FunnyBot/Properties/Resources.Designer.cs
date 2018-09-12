@@ -106,6 +106,15 @@ namespace FunnyBot.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Средний курс USD на .
+        /// </summary>
+        internal static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Пёс дня сегодня: .
         /// </summary>
         internal static string DogOfTheDay {

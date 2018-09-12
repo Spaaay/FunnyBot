@@ -58,5 +58,14 @@ namespace FunnyBot.Properties {
                 return ((string)(this["BotId"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")]
+        public string CurrencyUrl {
+            get {
+                return ((string)(this["CurrencyUrl"]));
+            }
+        }
     }
 }
