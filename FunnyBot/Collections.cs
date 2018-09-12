@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
 
 namespace FunnyBot
@@ -19,6 +20,7 @@ namespace FunnyBot
             {
                 Users[ChatId].Add(UserName);
             }
+
             // Text BD
             var temp = "";
             using (var fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
@@ -35,6 +37,12 @@ namespace FunnyBot
                     if (!AggressionList.Contains(temp)) RandomList.Add(temp);
                 }
             }
-        }
+
+            //SQLite
+            SQLiteConnection sqlite = new SQLiteConnection("Data Source=/AppData/LuckyBotBD.db;New=False;Version=3;");
+            sqlite.Open();
+
+
+        }  
     }
 }
