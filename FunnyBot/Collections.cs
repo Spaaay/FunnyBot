@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SQLite;
 using System.IO;
 
@@ -22,27 +24,30 @@ namespace FunnyBot
             }
 
             // Text BD
-            var temp = "";
-            using (var fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
-            {
-                while ((temp = fs.ReadLine()) != null)
-                {
-                    if (!AggressionList.Contains(temp)) AggressionList.Add(temp);
-                }
-            }
-            using (var fs = new StreamReader(@"..\..\AppData\BD_random.txt"))
-            {
-                while ((temp = fs.ReadLine()) != null)
-                {
-                    if (!AggressionList.Contains(temp)) RandomList.Add(temp);
-                }
-            }
+            //var temp = "";
+            //using (var fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
+            //{
+            //    while ((temp = fs.ReadLine()) != null)
+            //    {
+            //        if (!AggressionList.Contains(temp)) AggressionList.Add(temp);
+            //    }
+            //}
+            //using (var fs = new StreamReader(@"..\..\AppData\BD_random.txt"))
+            //{
+            //    while ((temp = fs.ReadLine()) != null)
+            //    {
+            //        if (!AggressionList.Contains(temp)) RandomList.Add(temp);
+            //    }
+            //}
 
             //SQLite
-            SQLiteConnection sqlite = new SQLiteConnection("Data Source=/AppData/LuckyBotBD.db;New=False;Version=3;");
+            SQLiteConnection sqlite = new SQLiteConnection("Data Source=|DataDirectory|../../AppData/LuckyBotBD.db;New=False;Version=3;");
             sqlite.Open();
-
-
+            ApplicationContext db = new ApplicationContext();
+            db.RandomPhrases.Load();
+            db.Agressions.Load();
+            foreach (RandomPhrase random in db.RandomPhrases)
+                Console.WriteLine(random.Phrase);
         }  
     }
 }
