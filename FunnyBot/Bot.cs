@@ -26,15 +26,16 @@ namespace FunnyBot
 
         static void Main(string[] args)
         {
-            ConnectToDb connnectToBD = new ConnectToDb();
+            ConnectToDb.Connect();
             BotClient = new TelegramBotClient(Settings.Default.BotId);
             BotClient.OnMessage += HandleMessage;
             BotClient.StartReceiving();
             var tr = new Thread(Randomizator);
             tr.Start();
             Console.ReadLine();
+            ConnectToDb.db.Dispose();
         }
-      
+
         static void HandleMessage(object sender, MessageEventArgs messageEventArgs)
         {
             try

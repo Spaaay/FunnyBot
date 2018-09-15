@@ -14,7 +14,7 @@ namespace FunnyBot
     }
 
     [Table("Aggression")]
-    public class Agression 
+    public class Agression
     {
         public int Id { get; set; }
         public string Phrase { get; set; }
@@ -28,7 +28,7 @@ namespace FunnyBot
     }
 
     [Table("BestJoke")]
-    public class BestJoke 
+    public class BestJoke
     {
         public int Id { get; set; }
         public string Joke { get; set; }

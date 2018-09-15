@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace FunnyBot
@@ -19,8 +17,8 @@ namespace FunnyBot
             //Encoding enc = Encoding.GetEncoding(1251);
             try
             {
-                HttpWebRequest myHttWebRequest = (HttpWebRequest) HttpWebRequest.Create(url);
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse) myHttWebRequest.GetResponse();
+                HttpWebRequest myHttWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttWebRequest.GetResponse();
                 using (StreamReader strm = new StreamReader(myHttpWebResponse.GetResponseStream()))
                 {
                     _htmlText = strm.ReadToEnd();

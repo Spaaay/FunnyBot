@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using FunnyBot.Properties;
 using Telegram.Bot.Types;
@@ -18,7 +17,7 @@ namespace FunnyBot
             var pic = GetPic(GetHtmlPage(Settings.Default.PicUrl));
             BotSender.SendPicture(ChatId, new FileToSend(pic));
         }
-        
+
         public static void Joke()
         {
             var joke = GetJoke(GetHtmlPage(Settings.Default.JokeUrl));
@@ -44,7 +43,7 @@ namespace FunnyBot
                 }
                 else
                 {
-                   BotSender.SendMessage(ChatId, Resources.Agressor_correct);
+                    BotSender.SendMessage(ChatId, Resources.Agressor_correct);
                 }
             }
             else BotSender.SendMessage(ChatId, Resources.Agressor_correct);
@@ -54,24 +53,21 @@ namespace FunnyBot
         {
             if (UserId.Id == Settings.Default.AdminId)
             {
-                using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_aggression.txt"))
+                var temp = Message?.Substring(9).Trim();
+                if (temp != null && temp.Length > 2)
                 {
-                    var temp = Message?.Substring(9).Trim();
-                    if (temp != null && temp.Length > 2)
+                    try
                     {
-                        try
-                        {
-                            FileWritter.WriteLine(temp);
-                            BotSender.SendMessage(ChatId, Resources.AddToBase + temp);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("AddAggresion Exception: " + e.Message);
-                        }
-
+                        ConnectToDb.db.Agressions.Add(new Agression() { Phrase = temp });
+                        ConnectToDb.db.SaveChanges();
+                        BotSender.SendMessage(ChatId, Resources.AddToBase + temp);
                     }
-                    else BotSender.SendMessage(ChatId, Resources.AddToBase_error);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("AddAggresion Exception: " + e.Message);
+                    }
                 }
+                else BotSender.SendMessage(ChatId, Resources.AddToBase_error);
             }
             else BotSender.SendMessage(ChatId, Resources.Access_denied);
         }
@@ -80,31 +76,28 @@ namespace FunnyBot
         {
             if (UserId.Id == Settings.Default.AdminId)
             {
-                using (var FileWritter = System.IO.File.AppendText(@"..\..\AppData\BD_random.txt"))
+                var temp = Message?.Substring(11).Trim();
+                if (temp != null && temp.Length > 2)
                 {
-                    var temp = Message?.Substring(11).Trim();
-                    if (temp != null && temp.Length > 2)
+                    try
                     {
-                        try
-                        {
-                            FileWritter.WriteLine(temp);
-                            BotSender.SendMessage(ChatId, Resources.AddToBase + temp);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("AddRandom Exception: " + e.Message);
-                        }
-
+                        ConnectToDb.db.RandomPhrases.Add(new RandomPhrase() { Phrase = temp });
+                        ConnectToDb.db.SaveChanges();
+                        BotSender.SendMessage(ChatId, Resources.AddToBase + temp);
                     }
-                    else BotSender.SendMessage(ChatId, Resources.AddToBase_error);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("AddRandom Exception: " + e.Message);
+                    }
                 }
+                else BotSender.SendMessage(ChatId, Resources.AddToBase_error);
             }
             else BotSender.SendMessage(ChatId, Resources.Access_denied);
         }
 
         public static void RandomAction(long chatId)
         {
-            BotSender.SendMessage(chatId, RandomList[Random.Next(0, RandomList.Count - 1)]); 
+            BotSender.SendMessage(chatId, RandomList[Random.Next(0, RandomList.Count - 1)]);
         }
 
         public static void FoundDog(List<string> users)
@@ -136,7 +129,7 @@ namespace FunnyBot
 
         public static void RandomAggression(string idUser)
         {
-            BotSender.SendMessage(ChatId, "@" + idUser+ " " + AggressionList[Random.Next(0, AggressionList.Count-1)]);
+            BotSender.SendMessage(ChatId, "@" + idUser + " " + AggressionList[Random.Next(0, AggressionList.Count - 1)]);
         }
     }
 }
