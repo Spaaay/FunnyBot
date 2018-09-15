@@ -22,34 +22,6 @@ namespace FunnyBot
             {
                 Users[ChatId].Add(UserName);
             }
-
-            //Text BD
-            //var temp = "";
-            //using (var fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
-            //{
-            //    while ((temp = fs.ReadLine()) != null)
-            //    {
-            //        if (!AggressionList.Contains(temp)) AggressionList.Add(temp);
-            //    }
-            //}
-            //using (var fs = new StreamReader(@"..\..\AppData\BD_random.txt"))
-            //{
-            //    while ((temp = fs.ReadLine()) != null)
-            //    {
-            //        if (!AggressionList.Contains(temp)) RandomList.Add(temp);
-            //    }
-            //}
-
-            //SQLite
-            //var file = File.Open("..//..//AppData//LuckyBotBD.db", FileMode.Open);
-            var connection = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            SQLiteConnection sqlite = new SQLiteConnection(connection);
-            sqlite.Open();
-            ApplicationContext db = new ApplicationContext();
-            db.RandomPhrases.Load();
-            db.Agressions.Load();
-            foreach (RandomPhrase random in db.RandomPhrases)
-                Console.WriteLine(random.Phrase);
         }  
     }
 }
