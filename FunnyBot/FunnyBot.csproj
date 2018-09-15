@@ -92,6 +92,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.109.1\lib\net451\System.Data.SQLite.dll</HintPath>
@@ -141,7 +143,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="AppData\LuckyBotBD.db" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

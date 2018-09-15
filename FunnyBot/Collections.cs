@@ -23,7 +23,7 @@ namespace FunnyBot
                 Users[ChatId].Add(UserName);
             }
 
-            // Text BD
+            //Text BD
             //var temp = "";
             //using (var fs = new StreamReader(@"..\..\AppData\BD_aggression.txt"))
             //{
@@ -41,7 +41,9 @@ namespace FunnyBot
             //}
 
             //SQLite
-            SQLiteConnection sqlite = new SQLiteConnection("Data Source=|DataDirectory|../../AppData/LuckyBotBD.db;New=False;Version=3;");
+            //var file = File.Open("..//..//AppData//LuckyBotBD.db", FileMode.Open);
+            var connection = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SQLiteConnection sqlite = new SQLiteConnection(connection);
             sqlite.Open();
             ApplicationContext db = new ApplicationContext();
             db.RandomPhrases.Load();
