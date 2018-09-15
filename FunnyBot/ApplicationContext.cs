@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 
 namespace FunnyBot
 {
@@ -11,8 +12,9 @@ namespace FunnyBot
         public DbSet<RandomPhrase> RandomPhrases { get; set; }
         public DbSet<BestJoke> BestJokes { get; set; }
     }
-    
 
+
+    [Table("Aggression")]
     public class Agression 
     {
         private string _phrase;
@@ -24,7 +26,7 @@ namespace FunnyBot
             set { _phrase = value;}
         }
     }
-
+    [Table("RandomPhrase")]
     public class RandomPhrase
     {
         private string _phrase;
@@ -36,7 +38,7 @@ namespace FunnyBot
             set { _phrase = value; }
         }
     }
-
+    [Table("BestJoke")]
     public class BestJoke 
     {
         private string _joke;
