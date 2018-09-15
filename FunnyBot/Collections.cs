@@ -44,6 +44,7 @@ namespace FunnyBot
             SQLiteConnection sqlite = new SQLiteConnection("Data Source=|DataDirectory|../../AppData/LuckyBotBD.db;New=False;Version=3;");
             sqlite.Open();
             ApplicationContext db = new ApplicationContext();
+
             db.RandomPhrases.Load();
             db.Agressions.Load();
             foreach (RandomPhrase random in db.RandomPhrases)
