@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using FunnyBot.Models;
 using Newtonsoft.Json;
 
 namespace FunnyBot
@@ -10,6 +11,7 @@ namespace FunnyBot
     public class HtmlParsing
     {
         private static string _htmlText = string.Empty;
+
         private static List<JsonCurrency> _currencyList = new List<JsonCurrency>();
 
         public static string GetHtmlPage(string url)
@@ -88,20 +90,6 @@ namespace FunnyBot
                 if (i.cc.ToLower().Equals("usd")) return Math.Round(i.rate, 2);
             }
             return 0;
-        }
-
-        public class JsonCurrency
-        {
-            [JsonProperty("r030")]
-            public int r030 { get; set; }
-            [JsonProperty("txt")]
-            public string txt { get; set; }
-            [JsonProperty("rate")]
-            public double rate { get; set; }
-            [JsonProperty("cc")]
-            public string cc { get; set; }
-            [JsonProperty("exchangedate")]
-            public string exchangedate { get; set; }
         }
     }
 }

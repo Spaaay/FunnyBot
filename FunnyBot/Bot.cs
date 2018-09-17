@@ -12,16 +12,27 @@ namespace FunnyBot
     class Bot
     {
         public static Random Random = new Random();
+
         public static TelegramBotClient BotClient;
+
         public static List<long> ChatIDs = new List<long>();
+
         public static Dictionary<long, List<string>> Users = new Dictionary<long, List<string>>();
+
         public static long ChatId;
+
         public static string Message;
+
         public static User UserId;
+
         public static string UserName;
+
         public static List<string> AggressionList = new List<string>();
+
         public static List<string> RandomList = new List<string>();
+
         public static bool Welcome;
+
         public static int Agressor = 8;
 
         static void Main(string[] args)
@@ -43,7 +54,7 @@ namespace FunnyBot
                 // Variables
                 ChatId = messageEventArgs.Message.Chat.Id;
                 if (messageEventArgs.Message.Text != null) Message = messageEventArgs.Message.Text.ToLower();
-                else Message = "";
+                else Message = string.Empty;
                 UserId = messageEventArgs.Message.From;
                 UserName = UserId.FirstName + " " + UserId.LastName;
                 // Welcome

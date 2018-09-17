@@ -4,6 +4,7 @@
     {
         public static void DoSomething()
         {
+            // todo Strategy pattern or Delegat`s
             if (Message.Equals("/joke") || Message.Equals("/joke@funny_luckybot")) BotLogic.Joke();
             else if (Message.Equals("/pic") || Message.Equals("/pic@funny_luckybot")) BotLogic.Pic();
             else if (Message.Equals("/founddog") || Message.Equals("/founddog@funny_luckybot")) BotLogic.FoundDog(Users[ChatId]);

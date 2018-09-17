@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.SQLite;
+using FunnyBot.DataBase.Entities;
 
 namespace FunnyBot
 {

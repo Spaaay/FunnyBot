@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FunnyBot.DataBase.Entities;
 using FunnyBot.Properties;
 using Telegram.Bot.Types;
 using static FunnyBot.HtmlParsing;

@@ -123,14 +123,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationContext.cs" />
-    <Compile Include="BotCommnands.cs" />
-    <Compile Include="BotSender.cs" />
-    <Compile Include="Collections.cs" />
-    <Compile Include="BotLogic.cs" />
+    <Compile Include="DataBase\ApplicationContext.cs" />
+    <Compile Include="BotLogic\BotCommnands.cs" />
+    <Compile Include="BotLogic\BotSender.cs" />
+    <Compile Include="BotLogic\Collections.cs" />
+    <Compile Include="BotLogic\BotLogic.cs" />
     <Compile Include="Bot.cs" />
-    <Compile Include="ConnectToDB.cs" />
-    <Compile Include="HtmlParsing.cs" />
+    <Compile Include="DataBase\ConnectToDB.cs" />
+    <Compile Include="DataBase\Entities\BestJoke.cs" />
+    <Compile Include="DataBase\Entities\Agression.cs" />
+    <Compile Include="DataBase\Entities\RandomPhrase.cs" />
+    <Compile Include="BotLogic\HtmlParsing.cs" />
+    <Compile Include="Models\JsonCurrency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
