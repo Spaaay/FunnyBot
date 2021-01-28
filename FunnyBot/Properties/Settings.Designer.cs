@@ -12,7 +12,7 @@ namespace FunnyBot.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -52,7 +52,7 @@ namespace FunnyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("581243302:AAFSsqS_ylNPB7-XNOmJ05Vtpih_kZbqljM")]
+        [global::System.Configuration.DefaultSettingValueAttribute("581243302:AAF7h91TuvgEbfh1JRDImVJ2eqC32ashEdc")]
         public string BotId {
             get {
                 return ((string)(this["BotId"]));

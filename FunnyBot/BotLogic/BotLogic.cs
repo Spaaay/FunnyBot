@@ -4,6 +4,7 @@ using System.Linq;
 using FunnyBot.DataBase.Entities;
 using FunnyBot.Properties;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.InputFiles;
 using static FunnyBot.HtmlParsing;
 
 
@@ -16,7 +17,7 @@ namespace FunnyBot
         public static void Pic()
         {
             var pic = GetPic(GetHtmlPage(Settings.Default.PicUrl));
-            BotSender.SendPicture(ChatId, new FileToSend(pic));
+            BotSender.SendPicture(ChatId, new InputOnlineFile(pic));
         }
 
         public static void Joke()

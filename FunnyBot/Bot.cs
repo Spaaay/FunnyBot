@@ -5,7 +5,8 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using FunnyBot.Properties;
-
+using System.Net;
+using System.IO;
 
 namespace FunnyBot
 {
@@ -35,14 +36,18 @@ namespace FunnyBot
 
         public static int Agressor = 8;
 
-        static void Main(string[] args)
+        // Имя бота в телеграмме - @Funny_LuckyBot
+        static async System.Threading.Tasks.Task Main(string[] args)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; 
             ConnectToDb.Connect();
             BotClient = new TelegramBotClient(Settings.Default.BotId);
             BotClient.OnMessage += HandleMessage;
             BotClient.StartReceiving();
             var tr = new Thread(Randomizator);
             tr.Start();
+            Console.WriteLine(BotClient.ToString());
+
             Console.ReadLine();
             ConnectToDb.db.Dispose();
         }

@@ -1,4 +1,5 @@
 ﻿using Telegram.Bot.Types;
+using Telegram.Bot.Types.InputFiles;
 
 namespace FunnyBot
 {
@@ -9,7 +10,7 @@ namespace FunnyBot
             BotClient.SendTextMessageAsync(chatId, text);
         }
 
-        public static void SendPicture(long chatId, FileToSend file)
+        public static void SendPicture(long chatId, InputOnlineFile file)
         {
             BotClient.SendPhotoAsync(chatId, file);
         }

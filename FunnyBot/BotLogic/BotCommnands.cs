@@ -1,4 +1,6 @@
-﻿namespace FunnyBot
+﻿using System;
+
+namespace FunnyBot
 {
     class BotCommnands : Bot
     {
