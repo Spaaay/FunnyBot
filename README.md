@@ -1,2 +1,2 @@
 # FunnyBot
-new version of Telegramm Bot
+Funny Telegramm Bot for group chats 
